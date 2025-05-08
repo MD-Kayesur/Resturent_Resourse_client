@@ -11,7 +11,7 @@ const AllUsers = () => {
   const {refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const result = await axiousUrl.get("users");
+      const result = await axiousUrl.get("/users");
       return refetch, result.data;
     },
   });

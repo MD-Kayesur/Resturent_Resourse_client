@@ -101,7 +101,7 @@ function Signup() {
               </fieldset>
             </form>
             <div className=" ">
-              <Sociallogin  name='sign up with     google'> <FaGoogle></FaGoogle></Sociallogin>
+              <Sociallogin  name='sign up with     google'> </Sociallogin>
             </div>
            
             <p className="m-3">

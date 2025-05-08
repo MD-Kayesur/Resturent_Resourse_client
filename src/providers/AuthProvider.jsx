@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
- 
+
 import { Axios } from "axios";
 import useAxiousPublic from "../Hooks/useAxiousPublic";
 export const AuthContext = createContext(null);
@@ -19,7 +19,7 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   // jwt token
-  const axiosPublic = useAxiousPublic()
+  const axiosPublic = useAxiousPublic();
 
   const [loding, setLoding] = useState(true);
   //  console.log(user);
@@ -52,24 +52,24 @@ function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
-     
-      
+
       if (user) {
         console.log(user);
         const userInfo = {
           email: user.email,
         };
         // get store client side
-        axiosPublic.post('/jwt',userInfo)
-        // Axios.post("/jwt", userInfo)
-        .then((res) => {
-          console.log(res.data);
-          if (res.data?.token) {
-            console.log(res.data?.token);
+        axiosPublic
+          .post("/jwt", userInfo)
+          // Axios.post("/jwt", userInfo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data?.token) {
+              console.log(res.data?.token);
 
-            localStorage.setItem("access-token", res.data?.token);
-          }
-        });
+              localStorage.setItem("access-token", res.data?.token);
+            }
+          });
       } else {
         // TODO :remove token(if tokan stored in the client side , localStores,  ,chaing,in memory)
         localStorage.removeItem("access-token");
