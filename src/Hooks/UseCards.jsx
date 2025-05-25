@@ -22,7 +22,16 @@ const {refetch, data : cart=[] }=useQuery({
     }
 })
 
-    return  [cart,refetch]
+const jwttoken= async (user)=>{
+    console.log(user);
+ const res = axiousUrl.post('/jwt',user ,{withCredentials: true})
+ console.log(res.data);
+ return res.data
+}
+
+
+
+    return  [cart,refetch,jwttoken]
 };
 
 export default UseCards;
