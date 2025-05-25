@@ -10,10 +10,15 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
 import Sociallogin from "../../components/Sociallogin";
+import { axiosPublic } from "../../Hooks/useAxiousPublic";
+import UseAxious from "../../Hooks/UseAxious";
+import UseCards from "../../Hooks/UseCards";
 
 function Login() {
     const captaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+    // const axiousUrl=UseAxious()
+    const [, , jwttoken]=UseCards()
 const Navigate =useNavigate()
 const location = useLocation()
 const forms = location?.state?.form?.pathname || '/'
@@ -30,13 +35,17 @@ const forms = location?.state?.form?.pathname || '/'
     const password = form.password.value;
     // console.log(email, password);
     signin(email, password)
-     .then(()=>{
+     .then((result)=>{
+const user = {email: result.user.email}
+console.log(user);
+       jwttoken(user)
+ 
       Swal.fire({
         title: " success!",
         icon: "success",
         draggable: true
       });
-      Navigate(forms,{replace:true})
+      // Navigate(forms,{replace:true})
     })
   };
 

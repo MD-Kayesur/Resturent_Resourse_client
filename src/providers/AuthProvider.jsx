@@ -53,27 +53,28 @@ function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
 
-      if (user) {
-        console.log(user);
-        const userInfo = {
-          email: user.email,
-        };
-        // get store client side
-        axiosPublic
-          .post("/jwt", userInfo)
-          // Axios.post("/jwt", userInfo)
-          .then((res) => {
-            console.log(res.data);
-            if (res.data?.token) {
-              console.log(res.data?.token);
+      // if (user) {
+      //   console.log(user);
+      //   const userInfo = {
+      //     email: user.email,
+      //   };
+      //   console.log(userInfo);
+      //   // get store client side
+      //   axiosPublic
+      //     .post("/jwt", userInfo)
+      //     // Axios.post("/jwt", userInfo)
+      //     .then((res) => {
+      //       console.log(res.data);
+      //       if (res.data?.token) {
+      //         console.log(res.data?.token);
 
-              localStorage.setItem("access-token", res.data?.token);
-            }
-          });
-      } else {
-        // TODO :remove token(if tokan stored in the client side , localStores,  ,chaing,in memory)
-        localStorage.removeItem("access-token");
-      }
+      //         localStorage.setItem("access-token", res.data?.token);
+      //       }
+      //     });
+      // } else {
+      //   // TODO :remove token(if tokan stored in the client side , localStores,  ,chaing,in memory)
+      //   localStorage.removeItem("access-token");
+      // }
       setLoding(false);
     });
     return () => {
